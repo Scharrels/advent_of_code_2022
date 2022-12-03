@@ -1,7 +1,7 @@
 use std::fs;
 use std::str::FromStr;
 
-static WIN_LOOKUP: &'static [u32] = &[
+static WIN_LOOKUP: &[u32] = &[
 //  X  Y  Z
     1, 2, 0, // A (rock)
     0, 1, 2, // B (paper)
