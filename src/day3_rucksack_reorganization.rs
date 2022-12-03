@@ -3,9 +3,9 @@ use std::fs;
 
 fn item_priority(item: char) -> u32 {
     match item {
-        'a'..='z' => item as u32 - 'A' as u32 + 27,
-        'A'..='Z' => item as u32 - 'a' as u32 + 1,
-        _ => 0,
+        'a'..='z' => item as u32 - 'a' as u32 + 1,
+        'A'..='Z' => item as u32 - 'A' as u32 + 27,
+        _ => unreachable!(),
     }
 }
 
