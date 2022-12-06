@@ -7,5 +7,14 @@ edition = "2021"
 
 [dependencies]
 itertools = "0.10.2"
-hex = "0.4"
-bitvec = "0.22"
+transpose = "0.2.2"
+parse-display = "0.7.0"
+#hex = "0.4" // used for 2021
+#bitvec = "0.22" // used for 2021
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+#opt-level = "z"  # Optimize for size.
+lto = true
+codegen-units = 1
+panic = "abort"
