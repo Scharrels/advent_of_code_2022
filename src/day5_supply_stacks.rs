@@ -57,8 +57,8 @@ fn read() -> (Vec<Vec<char>>, Vec<Instruction>) {
     (stacks, instructions)
 }
 
-fn rearrange_9000(stacks: &Vec<Vec<char>>, instructions: &Vec<Instruction>) -> String {
-    let mut private_stacks = stacks.clone();
+fn rearrange_9000(stacks: &[Vec<char>], instructions: &Vec<Instruction>) -> String {
+    let mut private_stacks = stacks.to_owned();
     for instruction in instructions {
         let range = (private_stacks[instruction.from - 1].len() - instruction.amount)..;
         let blocks_to_move = private_stacks[instruction.from - 1]
@@ -76,8 +76,8 @@ fn rearrange_9000(stacks: &Vec<Vec<char>>, instructions: &Vec<Instruction>) -> S
         .collect::<String>()
 }
 
-fn rearrange_9001(stacks: &Vec<Vec<char>>, instructions: &Vec<Instruction>) -> String {
-    let mut private_stacks = stacks.clone();
+fn rearrange_9001(stacks: &[Vec<char>], instructions: &Vec<Instruction>) -> String {
+    let mut private_stacks = stacks.to_owned();
     for instruction in instructions {
         let range = (private_stacks[instruction.from - 1].len() - instruction.amount)..;
         let blocks_to_move = private_stacks[instruction.from - 1]
