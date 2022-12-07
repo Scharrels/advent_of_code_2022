@@ -46,24 +46,19 @@ fn read() -> Dir {
     let file = fs::read_to_string("input/day7.txt").expect("File not found!");
     let mut current_dir = vec![Dir::create()];
     for line in file.lines() {
-        match line {
-            "$ ls" => (),
-            "$ cd /" => (),
-            "$ cd .." => {
+        match line.split_once(' ') {
+            Some(("$", "ls")) => (),
+            Some(("$", "cd /")) => (),
+            Some(("$", "cd ..")) => {
                 let directory = current_dir.pop().unwrap();
                 current_dir.last_mut().unwrap().add_subdirectory(directory);
             }
-            line if line.starts_with("$ cd ") => {
-                current_dir.push(Dir::create());
-            }
-            line if line.starts_with("dir ") => (),
-            line => {
-                let file = line
-                    .split_once(' ')
-                    .map(|(size, _)| size.parse().expect("Size is wrong"))
-                    .expect("Parse error");
-                current_dir.last_mut().unwrap().add_file(file);
-            }
+            Some(("$", _)) => current_dir.push(Dir::create()), // last possible $ input: "$ cd whatever"
+            Some(("dir", _)) => (),
+            Some((amount, _)) => {
+                current_dir.last_mut().unwrap().add_file(amount.parse().unwrap());
+            },
+            None => unreachable!(),
         }
     }
     while current_dir.len() > 1 {
